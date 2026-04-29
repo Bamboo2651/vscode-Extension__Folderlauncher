@@ -17,3 +17,7 @@ What type of extension?New Extension (TypeScript)What's the name?FolderLauncherW
 cd .\folder-launcher\
 code .
 F5を押して新しいウィンドウでvscodeを開いたら成功。
+
+export function activate(context: vscode.ExtensionContext) {
+activate :拡張機能が起動したときに呼ばれる。
+deactivate :拡張機能が終了するときに呼ばれる。

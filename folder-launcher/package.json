@@ -1,40 +1,77 @@
 {
-  "name": "folder-launcher",
-  "displayName": "FolderLauncher",
-  "description": "",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.118.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "folder-launcher.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.118.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
-    "typescript-eslint": "^8.56.1",
-    "eslint": "^9.39.3",
-    "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
-  }
+    "name": "folder-launcher",
+    "displayName": "FolderLauncher",
+    "description": "フォルダ管理パネルをサイドバーに追加する拡張機能",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.118.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./out/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "folderLauncher",
+                    "title": "FolderLauncher",
+                    "icon": "$(folder)"
+                }
+            ]
+        },
+        "views": {
+            "folderLauncher": [
+                {
+                    "id": "folderLauncherPanel",
+                    "name": "FolderLauncher"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "folder-launcher.helloWorld",
+                "title": "Hello World"
+            }
+        ],
+        "configuration": {
+            "title": "FolderLauncher",
+            "properties": {
+                "folderLauncher.roots": {
+                    "type": "array",
+                    "default": [],
+                    "description": "登録済みルートフォルダパス"
+                },
+                "folderLauncher.historyLimit": {
+                    "type": "number",
+                    "default": 10,
+                    "description": "履歴の最大件数"
+                },
+                "folderLauncher.favorites": {
+                    "type": "array",
+                    "default": [],
+                    "description": "お気に入りパス"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.118.0",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "22.x",
+        "typescript-eslint": "^8.56.1",
+        "eslint": "^9.39.3",
+        "typescript": "^5.9.3",
+        "@vscode/test-cli": "^0.0.12",
+        "@vscode/test-electron": "^2.5.2"
+    }
 }

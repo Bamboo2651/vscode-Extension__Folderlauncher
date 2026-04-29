@@ -21,3 +21,24 @@ F5を押して新しいウィンドウでvscodeを開いたら成功。
 export function activate(context: vscode.ExtensionContext) {
 activate :拡張機能が起動したときに呼ばれる。
 deactivate :拡張機能が終了するときに呼ばれる。
+
+t-02
+"viewsContainers": {
+    "activitybar": [
+        {
+            "id": "folderLauncher",
+            "title": "FolderLauncher",
+            "icon": "$(folder)"
+        }
+    ]
+},
+アクティビティバーに表示されるアイコンを追加する設定のコード。
+"views": {
+    "folderLauncher": [
+        {
+            "id": "folderLauncherPanel",
+            "name": "FolderLauncher"
+        }
+    ]
+},
+アイコンをクリックしたときに表示されるパネルの定義

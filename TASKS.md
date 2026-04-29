@@ -4,7 +4,7 @@
 
 - [x] **T-01** `yo code` で TypeScript 拡張テンプレート生成
 - [x] **T-02** `package.json` の基本情報・エンジンバージョン設定
-- [ ] **T-03** `tsconfig.json` を strict mode で設定
+- [x] **T-03** `tsconfig.json` を strict mode で設定
 - [ ] **T-04** アクティビティバーアイコン・viewContainer を `package.json` に登録
 - [ ] **T-05** `extension.ts` に activate / deactivate スタブ作成
 

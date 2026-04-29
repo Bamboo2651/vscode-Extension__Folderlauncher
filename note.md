@@ -13,3 +13,7 @@ yo code
 対話形式で質問がでるので、答えて生成する。
 質問　選択/入力
 What type of extension?New Extension (TypeScript)What's the name?FolderLauncherWhat's the identifier?folder-launcher（自動入力でOK）What's the description?適当でOK（後で変えられる）Initialize git?Yes or No、好みでBundle with webpack?NoPackage manager?npm
+
+cd .\folder-launcher\
+code .
+F5を押して新しいウィンドウでvscodeを開いたら成功。

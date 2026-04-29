@@ -1,0 +1,133 @@
+{
+  "name": "folder-launcher",
+  "displayName": "Folder Launcher",
+  "description": "Quickly open and manage folders from the sidebar",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "folderLauncher",
+          "title": "Folder Launcher",
+          "icon": "$(folder-library)"
+        }
+      ]
+    },
+    "views": {
+      "folderLauncher": [
+        {
+          "id": "folderLauncherView",
+          "name": "Folders"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "folderLauncher.addRoot",
+        "title": "Add Root Folder",
+        "icon": "$(add)"
+      },
+      {
+        "command": "folderLauncher.removeRoot",
+        "title": "Remove Root Folder"
+      },
+      {
+        "command": "folderLauncher.openFolder",
+        "title": "Open Folder"
+      },
+      {
+        "command": "folderLauncher.createFolder",
+        "title": "New Folder Here"
+      },
+      {
+        "command": "folderLauncher.renameFolder",
+        "title": "Rename Folder"
+      },
+      {
+        "command": "folderLauncher.deleteFolder",
+        "title": "Delete Folder"
+      },
+      {
+        "command": "folderLauncher.toggleFavorite",
+        "title": "Toggle Favorite"
+      },
+      {
+        "command": "folderLauncher.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "folderLauncher.addRoot",
+          "when": "view == folderLauncherView",
+          "group": "navigation"
+        },
+        {
+          "command": "folderLauncher.refresh",
+          "when": "view == folderLauncherView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "folderLauncher.removeRoot",
+          "when": "view == folderLauncherView && viewItem == root",
+          "group": "1_manage"
+        },
+        {
+          "command": "folderLauncher.createFolder",
+          "when": "view == folderLauncherView && viewItem =~ /^(root|folder)/",
+          "group": "2_folder"
+        },
+        {
+          "command": "folderLauncher.renameFolder",
+          "when": "view == folderLauncherView && viewItem =~ /^folder/",
+          "group": "2_folder"
+        },
+        {
+          "command": "folderLauncher.deleteFolder",
+          "when": "view == folderLauncherView && viewItem =~ /^folder/",
+          "group": "2_folder"
+        },
+        {
+          "command": "folderLauncher.toggleFavorite",
+          "group": "3_extra"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Folder Launcher",
+      "properties": {
+        "folderLauncher.roots": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Root folders to display in Folder Launcher (absolute paths)"
+        },
+        "folderLauncher.historyLimit": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum number of recent folders to remember"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

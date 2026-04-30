@@ -4,6 +4,7 @@
 
 VSCode のプライマリサイドバーにフォルダ管理パネルを追加する拡張機能。
 登録済みのルートフォルダ直下のサブフォルダを一覧表示し、ワンクリックで開ける。
+GitHub・VSCode Marketplace での一般公開を想定。
 
 ## 技術スタック
 
@@ -22,7 +23,6 @@ folder-launcher/
 │   ├── FolderProvider.ts   # TreeDataProvider 実装
 │   ├── FolderItem.ts       # TreeItem サブクラス
 │   ├── RootManager.ts      # ルートフォルダ CRUD
-│   ├── HistoryManager.ts   # 最近開いた履歴管理
 │   └── commands/
 │       ├── openFolder.ts
 │       ├── createFolder.ts
@@ -30,7 +30,7 @@ folder-launcher/
 │       └── deleteFolder.ts
 ├── package.json
 ├── tsconfig.json
-└── README.md
+└── README.md               # 英語で記述
 ```
 
 ## コーディング規約
@@ -40,6 +40,7 @@ folder-launcher/
 - VSCode API の非同期処理は `async/await`
 - エラーは `vscode.window.showErrorMessage` で通知
 - マジックナンバー禁止、定数は `constants.ts` に集約
+- UIテキスト・コメント・README はすべて英語（公開前提）
 
 ## 開発コマンド
 
@@ -55,3 +56,4 @@ npm run watch        # tsc --watch
 - ルートフォルダ直下の**1階層のみ**表示（再帰表示なし）
 - フォルダのみ表示（ファイルは非表示）
 - Windows パス区切りに対応（`path.win32` 使用可）
+- 履歴・お気に入り機能はv1スコープ外

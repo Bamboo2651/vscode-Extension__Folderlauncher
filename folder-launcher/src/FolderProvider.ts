@@ -27,4 +27,25 @@ export class FolderProvider implements vscode.TreeDataProvider<FolderItem>{
         }
         return [];
     }
+
+    //プライベート
+    private getRootItems(): FolderItem[]{
+        return this.rootManager.getRoots().map(
+            rootPath => new FolderItem(path.basename(rootPath), rootPath, 'root')
+        );
+    }
+    private getSubFolderItems(rootPath: string): FolderItem[]{
+        if (!fs.existsSync(rootPath)) {
+            vscode.window.showErrorMessage(`パスが見つからない。:${rootPath}`);
+            return [];
+        }
+
+        return fs.readdirSync(rootPath, { withFileType: treu })
+            .filter(entry => entry.isDirectory())
+            .map(entry => {
+                const fullPath = path.join(rootPath, entry.name);
+                return new FolderItem(entry.name, fullPath, 'folder');
+            });
+    }
+
 }

@@ -63,3 +63,12 @@ getTreeItem(element)：要素をTreeItemに変換して返す。
 今作っているFolderLauncherの場合：
 getChildren(undefined) → ルートフォルダ一覧を返す
 getChildren(rootItem) → そのルート直下のサブフォルダ一覧を返す
+
+t-09
+activate()の中でやること
+activate(
+    RootManagerを作る。
+    FolderProviderを作る。(RootMagerを渡す。)
+    TreeViewを作る。(FolderProviderを渡す。)
+    context.subscriptionsに登録する。(拡張が無効化された時に自動で破棄されるようにするために。)
+)

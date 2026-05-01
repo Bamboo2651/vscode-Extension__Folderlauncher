@@ -19,7 +19,7 @@
 ## フェーズ 3: TreeView UI
 
 - [x] **T-07** `FolderItem.ts` — TreeItem サブクラス（通常 / ルート）
-- [ ] **T-08** `FolderProvider.ts` — TreeDataProvider 実装
+- [x] **T-08** `FolderProvider.ts` — TreeDataProvider 実装
 - [ ] **T-09** `extension.ts` に TreeView を登録・初期化
 - [ ] **T-10** ルート直下のサブフォルダのみを `fs.readdirSync` で取得するロジック
 

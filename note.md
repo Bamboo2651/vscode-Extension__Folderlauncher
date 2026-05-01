@@ -52,3 +52,14 @@ f5で開いてアクティビティバーにアイコンが表示されたらOK
 
 t-05
 extension.tsの骨組みを書く。
+
+t-08
+TreeDataProviderとは？
+vscodeのtreeViewは「データを表示する方法を知っている人(provider)」が必要。私がtreedataproviderインターフェースを実装したクラスを作ると、vscodeがそれを呼び出して、サイドバーに描画してくれる。
+実装すべきもの
+TreeDataProviderには2つのメソッドが必須。
+getChildren(element?)：子要素のリストを返す。
+getTreeItem(element)：要素をTreeItemに変換して返す。
+今作っているFolderLauncherの場合：
+getChildren(undefined) → ルートフォルダ一覧を返す
+getChildren(rootItem) → そのルート直下のサブフォルダ一覧を返す

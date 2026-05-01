@@ -7,7 +7,7 @@ export function activate(context: vscode.ExtensionContext) {
     const rootManager = new RootManager(context.globalState);
     const folderProvider = new FolderProvider(rootManager)
 
-    const treeView = vscode.window.createTreeView('folderLauncher', {
+    const treeView = vscode.window.createTreeView('folderLauncherPanel', {
         treeDataProvider: folderProvider,
         showCollapseAll: true
     });

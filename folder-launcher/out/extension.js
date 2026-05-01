@@ -42,7 +42,7 @@ function activate(context) {
     // console.log('FolderLauncher activated');
     const rootManager = new RootManager_1.RootManager(context.globalState);
     const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
-    const treeView = vscode.window.createTreeView('folderLauncher', {
+    const treeView = vscode.window.createTreeView('folderLauncherPanel', {
         treeDataProvider: folderProvider,
         showCollapseAll: true
     });

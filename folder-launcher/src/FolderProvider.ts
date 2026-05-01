@@ -11,7 +11,7 @@ export class FolderProvider implements vscode.TreeDataProvider<FolderItem>{
     constructor(private readonly rootManager: RootManager) { }
     
     refresh(): void{
-        this._onDidChangeTreeData, fire();
+        this._onDidChangeTreeData.fire();
     }
 
     getTreeItem(item: FolderItem): FolderItem{
@@ -40,7 +40,7 @@ export class FolderProvider implements vscode.TreeDataProvider<FolderItem>{
             return [];
         }
 
-        return fs.readdirSync(rootPath, { withFileType: treu })
+        return fs.readdirSync(rootPath, { withFileType: true })
             .filter(entry => entry.isDirectory())
             .map(entry => {
                 const fullPath = path.join(rootPath, entry.name);

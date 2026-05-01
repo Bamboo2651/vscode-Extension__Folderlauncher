@@ -72,3 +72,6 @@ activate(
     TreeViewを作る。(FolderProviderを渡す。)
     context.subscriptionsに登録する。(拡張が無効化された時に自動で破棄されるようにするために。)
 )
+
+t-10
+t-08のときに終わってるから今回はパス。

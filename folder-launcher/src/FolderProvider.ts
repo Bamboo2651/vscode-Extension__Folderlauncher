@@ -40,7 +40,7 @@ export class FolderProvider implements vscode.TreeDataProvider<FolderItem>{
             return [];
         }
 
-        return fs.readdirSync(rootPath, { withFileType: true })
+        return fs.readdirSync(rootPath, { withFileTypes: true })
             .filter(entry => entry.isDirectory())
             .map(entry => {
                 const fullPath = path.join(rootPath, entry.name);

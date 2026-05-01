@@ -33,20 +33,22 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activate = activate;
-exports.deactivate = deactivate;
+exports.FolderItem = void 0;
 const vscode = __importStar(require("vscode"));
-const RootManager_1 = require("./RootManager");
-const FolderProvider_1 = require("./FolderProvider");
-function activate(context) {
-    // console.log('FolderLauncher activated');
-    const rootManager = new RootManager_1.RootManager(context.globalState);
-    const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
-    const treeView = vscode.window.createTreeView('folderLauncher', {
-        treeDataProvider: folderProvider,
-        showCollapseAll: true
-    });
-    context.subscriptions.push(treeView);
+class FolderItem extends vscode.TreeItem {
+    folderPath;
+    itemType;
+    constructor(label, folderPath, itemType) {
+        super(label);
+        this.folderPath = folderPath;
+        this.itemType = itemType;
+        if (itemType === 'root') {
+            this.iconPath = new vscode.ThemeIcon('root-folder');
+        }
+        else {
+            this.iconPath = new vscode.ThemeIcon('folder');
+        }
+    }
 }
-function deactivate() { }
-//# sourceMappingURL=extension.js.map
+exports.FolderItem = FolderItem;
+//# sourceMappingURL=FolderItem.js.map

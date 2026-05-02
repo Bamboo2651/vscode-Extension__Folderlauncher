@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { RootManager } from './RootManager';
 import { FolderProvider } from './FolderProvider';
 import { openFolder } from './commands/openFolder';
+import { FolderItem } from './FolderItem';
 
 export function activate(context: vscode.ExtensionContext) {
     const rootManager = new RootManager(context.globalState);

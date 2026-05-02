@@ -4,8 +4,8 @@ import { FolderItem } from '../FolderItem';
 export async function openFolder(item: FolderItem): Promise<void> {
     const choice = await vscode.window.showQuickPick(
         [
-            { label: 'Open in Current Window', newWindow: false },
-            { label: 'Open in New Window',     newWindow: true  },
+            { label: '現在のウィンドウで開く', newWindow: false },
+            { label: '新しいウィンドウで開く',     newWindow: true  },
         ],
         { placeHolder: `Open "${item.label}"` }
     );

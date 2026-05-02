@@ -33,28 +33,17 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FolderItem = void 0;
+exports.openFolder = openFolder;
 const vscode = __importStar(require("vscode"));
-class FolderItem extends vscode.TreeItem {
-    folderPath;
-    itemType;
-    constructor(label, folderPath, itemType) {
-        super(label);
-        this.folderPath = folderPath;
-        this.itemType = itemType;
-        if (itemType === 'root') {
-            this.iconPath = new vscode.ThemeIcon('root-folder');
-            this.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
-        }
-        else {
-            this.iconPath = new vscode.ThemeIcon('folder');
-            this.command = {
-                command: 'folderLauncher.openFolder',
-                title: 'Open Folder',
-                arguments: [this],
-            };
-        }
+async function openFolder(item) {
+    const choice = await vscode.window.showQuickPick([
+        { label: 'Open in Current Window', newWindow: false },
+        { label: 'Open in New Window', newWindow: true },
+    ], { placeHolder: `Open "${item.label}"` });
+    if (choice === undefined) {
+        return; // キャンセル
     }
+    const uri = vscode.Uri.file(item.folderPath);
+    await vscode.commands.executeCommand('vscode.openFolder', uri, choice.newWindow);
 }
-exports.FolderItem = FolderItem;
-//# sourceMappingURL=FolderItem.js.map
+//# sourceMappingURL=openFolder.js.map

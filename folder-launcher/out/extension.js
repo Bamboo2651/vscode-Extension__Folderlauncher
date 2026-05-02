@@ -38,15 +38,16 @@ exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
 const RootManager_1 = require("./RootManager");
 const FolderProvider_1 = require("./FolderProvider");
+const openFolder_1 = require("./commands/openFolder");
 function activate(context) {
-    // console.log('FolderLauncher activated');
     const rootManager = new RootManager_1.RootManager(context.globalState);
     const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
     const treeView = vscode.window.createTreeView('folderLauncherPanel', {
         treeDataProvider: folderProvider,
         showCollapseAll: true
     });
-    context.subscriptions.push(treeView);
+    const openFolderCmd = vscode.commands.registerCommand('folderLauncher.openFolder', (item) => (0, openFolder_1.openFolder)(item));
+    context.subscriptions.push(treeView, openFolderCmd);
 }
 function deactivate() { }
 //# sourceMappingURL=extension.js.map

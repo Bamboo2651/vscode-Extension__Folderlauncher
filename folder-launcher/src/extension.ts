@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { RootManager } from './RootManager';
 import { FolderProvider } from './FolderProvider';
-import { openFolder } from './commands/openFolder'; // 追加
+import { openFolder } from './commands/openFolder';
 
 export function activate(context: vscode.ExtensionContext) {
     const rootManager = new RootManager(context.globalState);
@@ -12,7 +12,6 @@ export function activate(context: vscode.ExtensionContext) {
         showCollapseAll: true
     });
 
-    // コマンド登録（追加）
     const openFolderCmd = vscode.commands.registerCommand(
         'folderLauncher.openFolder',
         (item: FolderItem) => openFolder(item)

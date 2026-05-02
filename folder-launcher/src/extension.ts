@@ -1,17 +1,24 @@
 import * as vscode from 'vscode';
 import { RootManager } from './RootManager';
 import { FolderProvider } from './FolderProvider';
+import { openFolder } from './commands/openFolder'; // 追加
 
 export function activate(context: vscode.ExtensionContext) {
-    // console.log('FolderLauncher activated');
     const rootManager = new RootManager(context.globalState);
-    const folderProvider = new FolderProvider(rootManager)
+    const folderProvider = new FolderProvider(rootManager);
 
     const treeView = vscode.window.createTreeView('folderLauncherPanel', {
         treeDataProvider: folderProvider,
         showCollapseAll: true
     });
-    context.subscriptions.push(treeView);
+
+    // コマンド登録（追加）
+    const openFolderCmd = vscode.commands.registerCommand(
+        'folderLauncher.openFolder',
+        (item: FolderItem) => openFolder(item)
+    );
+
+    context.subscriptions.push(treeView, openFolderCmd);
 }
 
 export function deactivate() {}

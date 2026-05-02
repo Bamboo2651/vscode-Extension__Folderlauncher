@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { FolderItem } from './FolderItem';
+import { FolderItem } from '../FolderItem';
 
 export async function openFolder(item: FolderItem): Promise<void> {
     const choice = await vscode.window.showQuickPick(

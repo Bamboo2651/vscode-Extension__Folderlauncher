@@ -39,6 +39,7 @@ const vscode = __importStar(require("vscode"));
 const RootManager_1 = require("./RootManager");
 const FolderProvider_1 = require("./FolderProvider");
 const openFolder_1 = require("./commands/openFolder");
+const addRoot_1 = require("./commands/addRoot");
 function activate(context) {
     const rootManager = new RootManager_1.RootManager(context.globalState);
     const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
@@ -47,7 +48,8 @@ function activate(context) {
         showCollapseAll: true
     });
     const openFolderCmd = vscode.commands.registerCommand('folderLauncher.openFolder', (item) => (0, openFolder_1.openFolder)(item));
-    context.subscriptions.push(treeView, openFolderCmd);
+    const addRootCmd = vscode.commands.registerCommand('folderLauncher.addRoot', () => (0, addRoot_1.addRoot)(rootManager, folderProvider));
+    context.subscriptions.push(treeView, openFolderCmd, addRootCmd);
 }
 function deactivate() { }
 //# sourceMappingURL=extension.js.map

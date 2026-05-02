@@ -27,7 +27,7 @@
 
 ## フェーズ 4: コマンド実装
 
-- [ ] **T-11** `openFolder.ts` — 現在 / 新規ウィンドウ選択クイックピック + openFolder 実行
+- [x] **T-11** `openFolder.ts` — 現在 / 新規ウィンドウ選択クイックピック + openFolder 実行
 - [ ] **T-12** `createFolder.ts` — 名前入力 → `fs.mkdirSync` → リフレッシュ
 - [ ] **T-13** `renameFolder.ts` — 現在名初期値 → `fs.renameSync` → リフレッシュ
 - [ ] **T-14** `deleteFolder.ts` — 確認ダイアログ → `fs.rmSync` → リフレッシュ

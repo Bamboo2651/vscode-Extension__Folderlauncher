@@ -31,8 +31,9 @@
         },
         "commands": [
             {
-                "command": "folder-launcher.helloWorld",
-                "title": "Hello World"
+                "command": "folderLauncher.addRoot",
+                "title": "Add Root Folder",
+                "icon": "$(add)"
             }
         ],
         "configuration": {

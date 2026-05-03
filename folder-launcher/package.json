@@ -45,7 +45,7 @@
             },
             {
                 "command": "folderLauncher.renameFolder",
-                "title": "Rename"
+                "title": "フォルダ名を変更"
             }
         ],
         "menus": {

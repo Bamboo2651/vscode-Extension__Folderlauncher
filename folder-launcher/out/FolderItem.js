@@ -45,9 +45,11 @@ class FolderItem extends vscode.TreeItem {
         if (itemType === 'root') {
             this.iconPath = new vscode.ThemeIcon('root-folder');
             this.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+            this.contextValue = 'root';
         }
         else {
             this.iconPath = new vscode.ThemeIcon('folder');
+            this.contextValue = 'folder';
             this.command = {
                 command: 'folderLauncher.openFolder',
                 title: 'Open Folder',

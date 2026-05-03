@@ -37,11 +37,11 @@
             },
             {
                 "command": "folderLauncher.openFolder",
-                "title": "Open Folder"
+                "title": "フォルダを開く"
             },
             {
                 "command": "folderLauncher.createFolder",
-                "title": "New Folder"
+                "title": "新しいフォルダ"
             }
         ],
         "menus": {

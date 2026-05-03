@@ -4,6 +4,7 @@ import { FolderProvider } from './FolderProvider';
 import { openFolder } from './commands/openFolder';
 import { FolderItem } from './FolderItem';
 import { addRoot } from './commands/addRoot';
+import { createFolder } from './commands/createFolder';
 
 export function activate(context: vscode.ExtensionContext) {
     const rootManager = new RootManager(context.globalState);
@@ -24,7 +25,12 @@ export function activate(context: vscode.ExtensionContext) {
         () => addRoot(rootManager, folderProvider)
     );
 
-    context.subscriptions.push(treeView, openFolderCmd,addRootCmd);
+    const createFolderCmd = vscode.commands.registerCommand(
+        'folderLauncher.createFolder',
+        (item: FolderItem) => createFolder(item, folderProvider)
+    );
+
+    context.subscriptions.push(treeView, openFolderCmd,addRootCmd,createFolderCmd);
 }
 
 export function deactivate() {}

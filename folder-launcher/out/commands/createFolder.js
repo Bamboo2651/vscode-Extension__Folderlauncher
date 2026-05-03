@@ -45,7 +45,8 @@ async function createFolder(item, folderProvider) {
     if (name === undefined || name.trim() === '') {
         return;
     }
-    const newPath = path.join(item.folderPath, name.trim());
+    const parentPath = path.dirname(item.folderPath);
+    const newPath = path.join(parentPath, name.trim());
     try {
         fs.mkdirSync(newPath);
         folderProvider.refresh();

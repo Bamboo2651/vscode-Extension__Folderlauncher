@@ -33,27 +33,27 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activate = activate;
-exports.deactivate = deactivate;
+exports.renameFolder = renameFolder;
 const vscode = __importStar(require("vscode"));
-const RootManager_1 = require("./RootManager");
-const FolderProvider_1 = require("./FolderProvider");
-const openFolder_1 = require("./commands/openFolder");
-const addRoot_1 = require("./commands/addRoot");
-const createFolder_1 = require("./commands/createFolder");
-const renameFolder_1 = require("./commands/renameFolder");
-function activate(context) {
-    const rootManager = new RootManager_1.RootManager(context.globalState);
-    const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
-    const treeView = vscode.window.createTreeView('folderLauncherPanel', {
-        treeDataProvider: folderProvider,
-        showCollapseAll: true
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+async function renameFolder(item, folderProvider) {
+    const currentName = path.basename(item.folderPath);
+    const parentPath = path.dirname(item.folderPath);
+    const newName = await vscode.window.showInputBox({
+        prompt: '新しいフォルダ名決定。',
+        value: currentName,
     });
-    const openFolderCmd = vscode.commands.registerCommand('folderLauncher.openFolder', (item) => (0, openFolder_1.openFolder)(item));
-    const addRootCmd = vscode.commands.registerCommand('folderLauncher.addRoot', () => (0, addRoot_1.addRoot)(rootManager, folderProvider));
-    const createFolderCmd = vscode.commands.registerCommand('folderLauncher.createFolder', (item) => (0, createFolder_1.createFolder)(item, folderProvider));
-    const renameFolderCmd = vscode.commands.registerCommand('folderLauncher.renameFolder', (item) => (0, renameFolder_1.renameFolder)(item, folderProvider));
-    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd);
+    if (newName === undefined || newName.trim() === '') {
+        return;
+    }
+    const newPath = path.join(parentPath, newName.trim());
+    try {
+        fs.renameSync(item.folderPath, newPath);
+        folderProvider.refresh();
+    }
+    catch (err) {
+        vscode.window.showErrorMessage(`フォルダ名を変更できませんでした。: ${err}`);
+    }
 }
-function deactivate() { }
-//# sourceMappingURL=extension.js.map
+//# sourceMappingURL=renameFolder.js.map

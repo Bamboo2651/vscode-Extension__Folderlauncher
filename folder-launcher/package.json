@@ -42,6 +42,10 @@
             {
                 "command": "folderLauncher.createFolder",
                 "title": "新しいフォルダ"
+            },
+            {
+                "command": "folderLauncher.renameFolder",
+                "title": "Rename"
             }
         ],
         "menus": {
@@ -55,6 +59,11 @@
             "view/item/context": [
                 {
                     "command": "folderLauncher.createFolder",
+                    "when": "view == folderLauncherPanel && viewItem == folder",
+                    "group": "1_modify"
+                },
+                {
+                    "command": "folderLauncher.renameFolder",
                     "when": "view == folderLauncherPanel && viewItem == folder",
                     "group": "1_modify"
                 }

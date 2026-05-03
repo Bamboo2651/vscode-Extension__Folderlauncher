@@ -34,8 +34,32 @@
                 "command": "folderLauncher.addRoot",
                 "title": "Add Root Folder",
                 "icon": "$(add)"
+            },
+            {
+                "command": "folderLauncher.openFolder",
+                "title": "Open Folder"
+            },
+            {
+                "command": "folderLauncher.createFolder",
+                "title": "New Folder"
             }
         ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "folderLauncher.addRoot",
+                    "when": "view == folderLauncherPanel",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "folderLauncher.createFolder",
+                    "when": "view == folderLauncherPanel && viewItem == folder",
+                    "group": "1_modify"
+                }
+            ]
+        },
         "configuration": {
             "title": "FolderLauncher",
             "properties": {

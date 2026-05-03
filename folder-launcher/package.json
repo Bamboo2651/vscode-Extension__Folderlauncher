@@ -32,7 +32,7 @@
         "commands": [
             {
                 "command": "folderLauncher.addRoot",
-                "title": "Add Root Folder",
+                "title": "ルートフォルダ追加",
                 "icon": "$(add)"
             },
             {

@@ -10,7 +10,7 @@ export async function addRoot(
         canSelectFolders: true,
         canSelectFiles: false,
         canSelectMany: false,
-        openLabel: 'Add as Root',
+        openLabel: 'ルートフォルダ追加',
     });
 
     if (uris === undefined || uris.length === 0) {

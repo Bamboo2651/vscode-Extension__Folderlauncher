@@ -33,25 +33,25 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activate = activate;
-exports.deactivate = deactivate;
+exports.createFolder = createFolder;
 const vscode = __importStar(require("vscode"));
-const RootManager_1 = require("./RootManager");
-const FolderProvider_1 = require("./FolderProvider");
-const openFolder_1 = require("./commands/openFolder");
-const addRoot_1 = require("./commands/addRoot");
-const createFolder_1 = require("./commands/createFolder");
-function activate(context) {
-    const rootManager = new RootManager_1.RootManager(context.globalState);
-    const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
-    const treeView = vscode.window.createTreeView('folderLauncherPanel', {
-        treeDataProvider: folderProvider,
-        showCollapseAll: true
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+async function createFolder(item, folderProvider) {
+    const name = await vscode.window.showInputBox({
+        prompt: 'フォルダ名前決定',
+        placeHolder: '新しいフォルダー名',
     });
-    const openFolderCmd = vscode.commands.registerCommand('folderLauncher.openFolder', (item) => (0, openFolder_1.openFolder)(item));
-    const addRootCmd = vscode.commands.registerCommand('folderLauncher.addRoot', () => (0, addRoot_1.addRoot)(rootManager, folderProvider));
-    const createFolderCmd = vscode.commands.registerCommand('folderLauncher.createFolder', (item) => (0, createFolder_1.createFolder)(item, folderProvider));
-    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd);
+    if (name === undefined || name.trim() === '') {
+        return;
+    }
+    const newPath = path.join(item.folderPath, name.trim());
+    try {
+        fs.mkdirSync(newPath);
+        folderProvider.refresh();
+    }
+    catch (err) {
+        vscode.window.showErrorMessage(`フォルダーを作れませんでした。：${err}`);
+    }
 }
-function deactivate() { }
-//# sourceMappingURL=extension.js.map
+//# sourceMappingURL=createFolder.js.map

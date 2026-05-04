@@ -39,8 +39,8 @@ const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 async function deleteFolder(item, folderProvider) {
     const folderName = path.basename(item.folderPath);
-    const choice = await vscode.window.showWarningMessage(`"${folderName}" and all its contents will be permanently deleted. Are you sure?`, { modal: true }, 'Delete');
-    if (choice !== 'Delete') {
+    const choice = await vscode.window.showWarningMessage(`"${folderName}" を削除しようとしています、本当に削除しますか？`, { modal: true }, '削除');
+    if (choice !== '削除') {
         return;
     }
     try {
@@ -48,7 +48,7 @@ async function deleteFolder(item, folderProvider) {
         folderProvider.refresh();
     }
     catch (err) {
-        vscode.window.showErrorMessage(`Failed to delete folder: ${err}`);
+        vscode.window.showErrorMessage(`フォルダの削除に失敗しました: ${err}`);
     }
 }
 //# sourceMappingURL=deleteFolder.js.map

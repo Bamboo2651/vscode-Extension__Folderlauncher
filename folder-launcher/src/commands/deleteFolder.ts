@@ -11,12 +11,12 @@ export async function deleteFolder(
     const folderName = path.basename(item.folderPath);
 
     const choice = await vscode.window.showWarningMessage(
-        `"${folderName}" and all its contents will be permanently deleted. Are you sure?`,
+        `"${folderName}" を削除しようとしています、本当に削除しますか？`,
         { modal: true },
-        'Delete'
+        '削除'
     );
 
-    if (choice !== 'Delete') {
+    if (choice !== '削除') {
         return;
     }
 
@@ -24,6 +24,6 @@ export async function deleteFolder(
         fs.rmSync(item.folderPath, { recursive: true });
         folderProvider.refresh();
     } catch (err) {
-        vscode.window.showErrorMessage(`Failed to delete folder: ${err}`);
+        vscode.window.showErrorMessage(`フォルダの削除に失敗しました: ${err}`);
     }
 }

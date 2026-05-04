@@ -70,6 +70,11 @@
                     "command": "folderLauncher.renameFolder",
                     "when": "view == folderLauncherPanel && viewItem == folder",
                     "group": "1_modify"
+                },
+                {
+                    "command": "folderLauncher.deleteFolder",
+                    "when": "view == folderLauncherPanel && viewItem == folder",
+                    "group": "1_modify"
                 }
             ]
         },

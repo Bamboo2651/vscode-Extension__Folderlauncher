@@ -50,6 +50,10 @@
             {
                 "command": "folderLauncher.deleteFolder",
                 "title": "フォルダを削除"
+            },
+            {
+                "command": "folderLauncher.removeRoot",
+                "title": "ルートフォルダから削除"
             }
         ],
         "menus": {
@@ -75,6 +79,11 @@
                     "command": "folderLauncher.deleteFolder",
                     "when": "view == folderLauncherPanel && viewItem == folder",
                     "group": "1_modify"
+                },
+                {
+                    "command": "folderLauncher.removeRoot",
+                    "when": "view == folderLauncherPanel && viewItem == root",
+                    "group": "2_delete"
                 }
             ]
         },

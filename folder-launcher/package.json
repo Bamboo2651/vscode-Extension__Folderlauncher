@@ -46,6 +46,10 @@
             {
                 "command": "folderLauncher.renameFolder",
                 "title": "フォルダ名を変更"
+            },
+            {
+                "command": "folderLauncher.deleteFolder",
+                "title": "フォルダを削除"
             }
         ],
         "menus": {

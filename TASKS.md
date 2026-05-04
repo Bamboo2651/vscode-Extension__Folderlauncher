@@ -30,7 +30,7 @@
 - [x] **T-11** `openFolder.ts` — 現在 / 新規ウィンドウ選択クイックピック + openFolder 実行
 - [x] **T-12** `createFolder.ts` — 名前入力 → `fs.mkdirSync` → リフレッシュ
 - [x] **T-13** `renameFolder.ts` — 現在名初期値 → `fs.renameSync` → リフレッシュ
-- [ ] **T-14** `deleteFolder.ts` — 確認ダイアログ → `fs.rmSync` → リフレッシュ
+- [x] **T-14** `deleteFolder.ts` — 確認ダイアログ → `fs.rmSync` → リフレッシュ
 - [x] **T-15** ルート追加コマンド（フォルダ選択ダイアログ）
 - [ ] **T-16** ルート削除コマンド
 

@@ -42,6 +42,7 @@ const openFolder_1 = require("./commands/openFolder");
 const addRoot_1 = require("./commands/addRoot");
 const createFolder_1 = require("./commands/createFolder");
 const renameFolder_1 = require("./commands/renameFolder");
+const deleteFolder_1 = require("./commands/deleteFolder");
 function activate(context) {
     const rootManager = new RootManager_1.RootManager(context.globalState);
     const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
@@ -53,7 +54,8 @@ function activate(context) {
     const addRootCmd = vscode.commands.registerCommand('folderLauncher.addRoot', () => (0, addRoot_1.addRoot)(rootManager, folderProvider));
     const createFolderCmd = vscode.commands.registerCommand('folderLauncher.createFolder', (item) => (0, createFolder_1.createFolder)(item, folderProvider));
     const renameFolderCmd = vscode.commands.registerCommand('folderLauncher.renameFolder', (item) => (0, renameFolder_1.renameFolder)(item, folderProvider));
-    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd);
+    const deleteFolderCmd = vscode.commands.registerCommand('folderLauncher.deleteFolder', (item) => (0, deleteFolder_1.deleteFolder)(item, folderProvider));
+    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd);
 }
 function deactivate() { }
 //# sourceMappingURL=extension.js.map

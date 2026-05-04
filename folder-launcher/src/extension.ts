@@ -6,6 +6,7 @@ import { FolderItem } from './FolderItem';
 import { addRoot } from './commands/addRoot';
 import { createFolder } from './commands/createFolder';
 import { renameFolder } from './commands/renameFolder';
+import { deleteFolder } from './commands/deleteFolder';
 
 export function activate(context: vscode.ExtensionContext) {
     const rootManager = new RootManager(context.globalState);
@@ -36,7 +37,12 @@ export function activate(context: vscode.ExtensionContext) {
         (item: FolderItem) => renameFolder(item, folderProvider)
     );
 
-    context.subscriptions.push(treeView, openFolderCmd,addRootCmd,createFolderCmd,renameFolderCmd);
+    const deleteFolderCmd = vscode.commands.registerCommand(
+        'folderLauncher.deleteFolder',
+        (item: FolderItem) => deleteFolder(item, folderProvider)
+    );
+
+    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd);
 }
 
 export function deactivate() {}

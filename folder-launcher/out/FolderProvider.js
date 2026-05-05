@@ -51,6 +51,9 @@ class FolderProvider {
     getTreeItem(item) {
         return item;
     }
+    getParent(_item) {
+        return undefined;
+    }
     getChildren(item) {
         if (item === undefined) {
             return this.getRootItems();

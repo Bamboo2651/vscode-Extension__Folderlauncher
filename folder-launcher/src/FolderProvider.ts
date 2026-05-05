@@ -4,18 +4,22 @@ import * as path from 'path';
 import { FolderItem } from './FolderItem';
 import { RootManager } from './RootManager';
 
-export class FolderProvider implements vscode.TreeDataProvider<FolderItem>{
+export class FolderProvider implements vscode.TreeDataProvider<FolderItem> {
     private readonly _onDidChangeTreeData = new vscode.EventEmitter<void>();
     readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
 
     constructor(private readonly rootManager: RootManager) { }
-    
-    refresh(): void{
+
+    refresh(): void {
         this._onDidChangeTreeData.fire();
     }
 
-    getTreeItem(item: FolderItem): FolderItem{
+    getTreeItem(item: FolderItem): FolderItem {
         return item;
+    }
+    
+    getParent(_item: FolderItem): undefined {
+        return undefined;
     }
 
     getChildren(item?: FolderItem): FolderItem[] {
@@ -29,12 +33,12 @@ export class FolderProvider implements vscode.TreeDataProvider<FolderItem>{
     }
 
     //プライベート
-    private getRootItems(): FolderItem[]{
+    private getRootItems(): FolderItem[] {
         return this.rootManager.getRoots().map(
             rootPath => new FolderItem(path.basename(rootPath), rootPath, 'root')
         );
     }
-    private getSubFolderItems(rootPath: string): FolderItem[]{
+    private getSubFolderItems(rootPath: string): FolderItem[] {
         if (!fs.existsSync(rootPath)) {
             vscode.window.showErrorMessage(`パスが見つからない。:${rootPath}`);
             return [];

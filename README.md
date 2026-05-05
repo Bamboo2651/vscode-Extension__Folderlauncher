@@ -1,59 +1,29 @@
-# FolderLauncher VSCode Extension
+# FolderLauncher
 
-## プロジェクト概要
+VSCode のサイドバーにフォルダ管理パネルを追加する拡張機能。  
+ルートフォルダを登録して、サブフォルダをワンクリックで開ける。
 
-VSCode のプライマリサイドバーにフォルダ管理パネルを追加する拡張機能。
-登録済みのルートフォルダ直下のサブフォルダを一覧表示し、ワンクリックで開ける。
-GitHub・VSCode Marketplace での一般公開を想定。
+## 機能
 
-## 技術スタック
+- ルートフォルダを複数登録
+- サブフォルダをサイドバーに一覧表示
+- 現在のウィンドウ / 新しいウィンドウで開く
+- 右クリックでフォルダの作成・名前変更・削除
 
-- **言語**: TypeScript
-- **プラットフォーム**: VSCode Extension API（`vscode` モジュール）
-- **対象OS**: Windows
-- **UI**: TreeView（`vscode.window.createTreeView`）
-- **設定永続化**: `vscode.workspace.getConfiguration` / `globalState`
+## インストール方法
 
-## ディレクトリ構成
+1. [Releases](../../releases) から `folder-launcher-0.0.1.vsix` をダウンロード
+2. VSCode で `Ctrl+Shift+P` →「VSIXからインストール」を選択
+3. ダウンロードした `.vsix` ファイルを選択
 
-```
-folder-launcher/
-├── src/
-│   ├── extension.ts        # activate / deactivate
-│   ├── FolderProvider.ts   # TreeDataProvider 実装
-│   ├── FolderItem.ts       # TreeItem サブクラス
-│   ├── RootManager.ts      # ルートフォルダ CRUD
-│   └── commands/
-│       ├── openFolder.ts
-│       ├── createFolder.ts
-│       ├── renameFolder.ts
-│       └── deleteFolder.ts
-├── package.json
-├── tsconfig.json
-└── README.md               # 英語で記述
-```
+## 使い方
 
-## コーディング規約
+1. アクティビティバーの FolderLauncher アイコンをクリック
+2. `+` ボタンでルートフォルダを追加
+3. サブフォルダをクリックして開く
+4. 右クリックでフォルダの作成・名前変更・削除が可能
 
-- TypeScript strict mode
-- クラスは単一責任（1クラス1役割）
-- VSCode API の非同期処理は `async/await`
-- エラーは `vscode.window.showErrorMessage` で通知
-- マジックナンバー禁止、定数は `constants.ts` に集約
-- UIテキスト・コメント・README はすべて英語（公開前提）
+## 動作環境
 
-## 開発コマンド
-
-```bash
-npm install
-npm run compile      # tsc
-npm run watch        # tsc --watch
-# F5 でExtension Development Host 起動
-```
-
-## 重要な制約
-
-- ルートフォルダ直下の**1階層のみ**表示（再帰表示なし）
-- フォルダのみ表示（ファイルは非表示）
-- Windows パス区切りに対応（`path.win32` 使用可）
-- 履歴・お気に入り機能はv1スコープ外
+- Windows のみ（v1）
+- VSCode 1.80.0 以上

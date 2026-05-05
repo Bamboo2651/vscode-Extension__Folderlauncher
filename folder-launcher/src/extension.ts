@@ -37,14 +37,17 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     setTimeout(async () => {
+        console.log('expandedRoots:', [...expandedRoots]);
+        const roots = folderProvider.getChildren();
+        console.log('roots:', roots.map(r => r.folderPath));
         for (const rootPath of expandedRoots) {
-            const roots = folderProvider.getChildren();
             const target = roots.find(r => r.folderPath === rootPath);
+            console.log('target:', target);
             if (target) {
                 await treeView.reveal(target, { expand: true, select: false, focus: false });
             }
         }
-    }, 300);
+    }, 500);;
 
     const openFolderCmd = vscode.commands.registerCommand(
         'folderLauncher.openFolder',
@@ -79,4 +82,4 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd, removeRootCmd);
 }
 
-export function deactivate() {}
+export function deactivate() { }

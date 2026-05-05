@@ -66,14 +66,18 @@ function activate(context) {
         }
     });
     setTimeout(async () => {
+        console.log('expandedRoots:', [...expandedRoots]);
+        const roots = folderProvider.getChildren();
+        console.log('roots:', roots.map(r => r.folderPath));
         for (const rootPath of expandedRoots) {
-            const roots = folderProvider.getChildren();
             const target = roots.find(r => r.folderPath === rootPath);
+            console.log('target:', target);
             if (target) {
                 await treeView.reveal(target, { expand: true, select: false, focus: false });
             }
         }
-    }, 300);
+    }, 500);
+    ;
     const openFolderCmd = vscode.commands.registerCommand('folderLauncher.openFolder', (item) => (0, openFolder_1.openFolder)(item));
     const addRootCmd = vscode.commands.registerCommand('folderLauncher.addRoot', () => (0, addRoot_1.addRoot)(rootManager, folderProvider));
     const createFolderCmd = vscode.commands.registerCommand('folderLauncher.createFolder', (item) => (0, createFolder_1.createFolder)(item, folderProvider));

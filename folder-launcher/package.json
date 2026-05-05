@@ -2,7 +2,7 @@
     "name": "folder-launcher",
     "displayName": "FolderLauncher",
     "description": "フォルダ管理パネルをサイドバーに追加する拡張機能",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.118.0"
     },

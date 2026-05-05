@@ -44,6 +44,7 @@ const createFolder_1 = require("./commands/createFolder");
 const renameFolder_1 = require("./commands/renameFolder");
 const deleteFolder_1 = require("./commands/deleteFolder");
 const removeRoot_1 = require("./commands/removeRoot");
+const EXPANDED_ROOTS_KEY = 'folderLauncher.expandedRoots';
 function activate(context) {
     const rootManager = new RootManager_1.RootManager(context.globalState);
     const folderProvider = new FolderProvider_1.FolderProvider(rootManager);
@@ -51,6 +52,28 @@ function activate(context) {
         treeDataProvider: folderProvider,
         showCollapseAll: true
     });
+    const expandedRoots = new Set(context.globalState.get(EXPANDED_ROOTS_KEY, []));
+    treeView.onDidExpandElement(e => {
+        if (e.element.itemType === 'root') {
+            expandedRoots.add(e.element.folderPath);
+            context.globalState.update(EXPANDED_ROOTS_KEY, [...expandedRoots]);
+        }
+    });
+    treeView.onDidCollapseElement(e => {
+        if (e.element.itemType === 'root') {
+            expandedRoots.delete(e.element.folderPath);
+            context.globalState.update(EXPANDED_ROOTS_KEY, [...expandedRoots]);
+        }
+    });
+    setTimeout(async () => {
+        for (const rootPath of expandedRoots) {
+            const roots = folderProvider.getChildren();
+            const target = roots.find(r => r.folderPath === rootPath);
+            if (target) {
+                await treeView.reveal(target, { expand: true, select: false, focus: false });
+            }
+        }
+    }, 300);
     const openFolderCmd = vscode.commands.registerCommand('folderLauncher.openFolder', (item) => (0, openFolder_1.openFolder)(item));
     const addRootCmd = vscode.commands.registerCommand('folderLauncher.addRoot', () => (0, addRoot_1.addRoot)(rootManager, folderProvider));
     const createFolderCmd = vscode.commands.registerCommand('folderLauncher.createFolder', (item) => (0, createFolder_1.createFolder)(item, folderProvider));

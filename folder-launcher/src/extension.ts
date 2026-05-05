@@ -9,6 +9,8 @@ import { renameFolder } from './commands/renameFolder';
 import { deleteFolder } from './commands/deleteFolder';
 import { removeRoot } from './commands/removeRoot';
 
+const EXPANDED_ROOTS_KEY = 'folderLauncher.expandedRoots';
+
 export function activate(context: vscode.ExtensionContext) {
     const rootManager = new RootManager(context.globalState);
     const folderProvider = new FolderProvider(rootManager);
@@ -17,6 +19,32 @@ export function activate(context: vscode.ExtensionContext) {
         treeDataProvider: folderProvider,
         showCollapseAll: true
     });
+
+    const expandedRoots = new Set<string>(
+        context.globalState.get<string[]>(EXPANDED_ROOTS_KEY, [])
+    );
+    treeView.onDidExpandElement(e => {
+        if (e.element.itemType === 'root') {
+            expandedRoots.add(e.element.folderPath);
+            context.globalState.update(EXPANDED_ROOTS_KEY, [...expandedRoots]);
+        }
+    });
+    treeView.onDidCollapseElement(e => {
+        if (e.element.itemType === 'root') {
+            expandedRoots.delete(e.element.folderPath);
+            context.globalState.update(EXPANDED_ROOTS_KEY, [...expandedRoots]);
+        }
+    });
+
+    setTimeout(async () => {
+        for (const rootPath of expandedRoots) {
+            const roots = folderProvider.getChildren();
+            const target = roots.find(r => r.folderPath === rootPath);
+            if (target) {
+                await treeView.reveal(target, { expand: true, select: false, focus: false });
+            }
+        }
+    }, 300);
 
     const openFolderCmd = vscode.commands.registerCommand(
         'folderLauncher.openFolder',

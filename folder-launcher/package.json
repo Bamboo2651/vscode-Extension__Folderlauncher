@@ -54,12 +54,22 @@
             {
                 "command": "folderLauncher.removeRoot",
                 "title": "ルートフォルダから削除"
+            },
+            {
+                "command": "folderLauncher.refresh",
+                "title": "Refresh",
+                "icon": "$(refresh)"
             }
         ],
         "menus": {
             "view/title": [
                 {
                     "command": "folderLauncher.addRoot",
+                    "when": "view == folderLauncherPanel",
+                    "group": "navigation"
+                },
+                {
+                    "command": "folderLauncher.refresh",
                     "when": "view == folderLauncherPanel",
                     "group": "navigation"
                 }

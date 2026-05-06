@@ -84,7 +84,8 @@ function activate(context) {
     const renameFolderCmd = vscode.commands.registerCommand('folderLauncher.renameFolder', (item) => (0, renameFolder_1.renameFolder)(item, folderProvider));
     const deleteFolderCmd = vscode.commands.registerCommand('folderLauncher.deleteFolder', (item) => (0, deleteFolder_1.deleteFolder)(item, folderProvider));
     const removeRootCmd = vscode.commands.registerCommand('folderLauncher.removeRoot', (item) => (0, removeRoot_1.removeRoot)(item, rootManager, folderProvider));
-    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd, removeRootCmd);
+    const refreshCmd = vscode.commands.registerCommand('folderLauncher.refresh', () => folderProvider.refresh());
+    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd, removeRootCmd, refreshCmd);
 }
 function deactivate() { }
 //# sourceMappingURL=extension.js.map

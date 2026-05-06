@@ -79,7 +79,12 @@ export function activate(context: vscode.ExtensionContext) {
         (item: FolderItem) => removeRoot(item, rootManager, folderProvider)
     );
 
-    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd, removeRootCmd);
+    const refreshCmd = vscode.commands.registerCommand(
+        'folderLauncher.refresh',
+        () => folderProvider.refresh()
+    );
+
+    context.subscriptions.push(treeView, openFolderCmd, addRootCmd, createFolderCmd, renameFolderCmd, deleteFolderCmd, removeRootCmd, refreshCmd);
 }
 
 export function deactivate() { }

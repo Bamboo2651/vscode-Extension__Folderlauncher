@@ -66,12 +66,12 @@
                 {
                     "command": "folderLauncher.addRoot",
                     "when": "view == folderLauncherPanel",
-                    "group": "navigation"
+                    "group": "navigation@1"
                 },
                 {
                     "command": "folderLauncher.refresh",
                     "when": "view == folderLauncherPanel",
-                    "group": "navigation"
+                    "group": "navigation@2"
                 }
             ],
             "view/item/context": [
